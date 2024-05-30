@@ -1,4 +1,4 @@
-﻿// CPP_AoC_Day1_Trebuchet.cpp : Defines the entry point for the application.
+﻿// CPP_AoC_Day1_Trebuchet.cpp : Solution for Advent of Code 2023 Day 1
 //
 
 #include "CPP_AoC_Day1_Trebuchet.h"
@@ -9,6 +9,25 @@
 #include <vector>
 #include <unordered_map>
 #include <fstream>
+
+// Read txt line by line into vector of strings
+std::vector<std::string> readLinesFromFile(const std::string& filename) {
+    std::vector<std::string> lines;
+    std::ifstream file(filename);
+
+    if (!file) {
+        std::cerr << "Error: Could not open the file " << filename << std::endl;
+        return lines;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        lines.push_back(line);
+    }
+
+    file.close();
+    return lines;
+}
 
 // Using regex to pattern match all numbers in a string and add to vector of strings
 std::vector<std::string> getNumbersFromString(const std::string& str) {
@@ -31,7 +50,7 @@ std::vector<std::string> getNumbersFromString(const std::string& str) {
     return numbers;
 }
 
-// Convert strings from vector to vector of ints
+// Convert vector of strings to vector of ints
 std::vector<int> convertStringsToIntegers(const std::vector<std::string>& strVector) {
     std::vector<int> intVector;
     std::unordered_map<std::string, int> numberMap = {
@@ -66,25 +85,6 @@ int composeNumber(const std::vector<int>& intVector) {
         result += intVector.back();
 
     return result;
-}
-
-// Read txt line by line into vector of strings
-std::vector<std::string> readLinesFromFile(const std::string& filename) {
-    std::vector<std::string> lines;
-    std::ifstream file(filename);
-
-    if (!file) {
-        std::cerr << "Error: Could not open the file " << filename << std::endl;
-        return lines;
-    }
-
-    std::string line;
-    while (std::getline(file, line)) {
-        lines.push_back(line);
-    }
-
-    file.close();
-    return lines;
 }
 
 // Add and return total from all string lines found in text file
